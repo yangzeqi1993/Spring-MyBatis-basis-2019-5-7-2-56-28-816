@@ -10,16 +10,18 @@ import java.util.List;
 @RestController
 @RequestMapping("")
 public class UserController {
+
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping("/user")
+    @GetMapping("/")
     public List<User> findAll() {
+        System.out.println("进入了请求方法");
         return userMapper.findAll();
     }
 
     @GetMapping("/user/{userId}")
-    public User findById(@PathVariable long userId) {
+    public User findById(@PathVariable int userId) {
         return userMapper.findById(userId);
     }
 
@@ -28,13 +30,13 @@ public class UserController {
         userMapper.insertUser(user);
     }
 
-    @PutMapping("/user/{userId}")
-    public void updateUser(@RequestBody User user,@PathVariable long userId) {
-        userMapper.updateUser(userId, user.getName());
+    @PutMapping("/user")
+    public void updateUser(@RequestBody User user) {
+        userMapper.updateUser(user);
     }
 
     @DeleteMapping("/user/{userId}")
-    public void deleteById(@PathVariable long userId) {
+    public void deleteById(@PathVariable int userId) {
         userMapper.deleteUser(userId);
     }
 }
