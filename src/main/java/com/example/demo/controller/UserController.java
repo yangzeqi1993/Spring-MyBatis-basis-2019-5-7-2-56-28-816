@@ -15,8 +15,8 @@ public class UserController {
     private UserMapper userMapper;
 
     @GetMapping("/")
+    @CrossOrigin(origins = "*")
     public List<User> findAll() {
-        System.out.println("进入了请求方法");
         return userMapper.findAll();
     }
 
@@ -26,16 +26,20 @@ public class UserController {
     }
 
     @PostMapping("/user")
+    @CrossOrigin(origins = "*")
     public void insertUser(@RequestBody User user) {
         userMapper.insertUser(user);
     }
 
-    @PutMapping("/user")
-    public void updateUser(@RequestBody User user) {
+    @PutMapping("/user/{userId}")
+    @CrossOrigin(origins = "*")
+    public void updateUser(@PathVariable int userId, @RequestBody User user) {
+        System.out.println("进入了请求方法");
         userMapper.updateUser(user);
     }
 
     @DeleteMapping("/user/{userId}")
+    @CrossOrigin(origins = "*")
     public void deleteById(@PathVariable int userId) {
         userMapper.deleteUser(userId);
     }
